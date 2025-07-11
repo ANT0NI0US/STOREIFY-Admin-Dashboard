@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-xs: 480px;
+  --breakpoint-grid-screen: 653px;
+  --breakpoint-sm: 768px;
+  --breakpoint-md: 1060px;
+  --breakpoint-lg: 1280px;
+
+  --background-image-common-section-pattern: linear-gradient(
+      rgba(0, 0, 0, 0.562),
+      rgba(0, 0, 0, 0.562)
+    ),
+    url("https://i.ibb.co/dDS4MWS/common-section.webp");
+
+  --color-text-dark-color: #e8d6c2;
+  --color-primary-dark-color: #1a1a1a;
+  --color-secondary-dark-color: #2a2a2a;
+  --color-accent-dark-color: #6e5e48;
+  --color-widget-dark-color: #8c7a5a;
+  --color-error-dark-color: #ff3333;
+
+  --color-text-light-color: #4b352a;
+  --color-primary-light-color: #ded0b6;
+  --color-secondary-light-color: #faeed1;
+  --color-accent-light-color: #bbab8c;
+  --color-widget-light-color: #ccb29e;
+  --color-error-light-color: #ff0000;
+
+  --font-Merienda: "Merienda", "cursive";
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    @apply border-accent-light-color dark:border-accent-dark-color;
+  }
+
+  body {
+    @apply text-text-light-color;
+  }
+
+  html.dark body {
+    @apply text-text-dark-color;
+  }
+}
+
+@utility input {
+  @apply placeholder:text-primary-light-color dark:placeholder:text-primary-dark-color w-full p-[10px] outline-0 transition-all duration-300 placeholder:text-sm disabled:cursor-not-allowed disabled:border-0;
+
+  &:-webkit-autofill {
+    -webkit-text-fill-color: #253b45;
+    box-shadow: 0 0 0px 1000px rgb(218 243 255 / 0.6) inset;
+    caret-color: #253b45;
+  }
+  .dark &:-webkit-autofill {
+    -webkit-text-fill-color: #88d07a;
+    box-shadow: 0 0 0px 1000px rgba(14, 16, 19, 0.923) inset;
+    caret-color: #88d07a;
+  }
+}
+
+@layer components {
+  button {
+    @apply cursor-pointer;
+  }
+}
+
+@utility dark {
+  & .input:-webkit-autofill {
+    -webkit-text-fill-color: #88d07a;
+    box-shadow: 0 0 0px 1000px rgba(14, 16, 19, 0.923) inset;
+    caret-color: #88d07a;
+  }
+}
+
+@utility flexCenter {
+  @apply flex items-center justify-center;
+}
+
+@utility flexBetween {
+  @apply flex items-center justify-between;
+}
+
+@utility flexEvenly {
+  @apply flex items-center justify-evenly;
+}
+
+@layer utilities {
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: "Winky Sans", sans-serif;
+  }
+}
+
+/* scrollbar Styles */
+*::-webkit-scrollbar {
+  @apply w-[5px];
+}
+*::-webkit-scrollbar-track {
+  @apply bg-primary-light-color;
+}
+
+.dark *::-webkit-scrollbar-track {
+  @apply bg-primary-dark-color;
+}
+
+*::-webkit-scrollbar-thumb {
+  @apply bg-text-light-color;
+}
+
+.dark *::-webkit-scrollbar-thumb {
+  @apply bg-text-dark-color;
+}
+
+/* Vertical scrollbar */
+*::-webkit-scrollbar:vertical {
+  @apply w-[8px];
+}
+
+/* Horizontal scrollbar */
+*::-webkit-scrollbar:horizontal {
+  @apply h-[10px];
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
